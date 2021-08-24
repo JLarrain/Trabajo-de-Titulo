@@ -1,0 +1,264 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://scenes/gui/affective_slider.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/theme/fonts/main_title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://art/keys/Space-Key On.png" type="Texture" id=3]
+[ext_resource path="res://scripts/levels/level_gui/level_gui.gd" type="Script" id=4]
+[ext_resource path="res://scenes/levels/level_gui/score_panel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/levels/level_gui/bonus_gui.tscn" type="PackedScene" id=6]
+[ext_resource path="res://art/keys/Space-Key Off.png" type="Texture" id=7]
+[ext_resource path="res://assets/theme/fonts/menu_panel_subtitle.tres" type="DynamicFont" id=8]
+[ext_resource path="res://scenes/gui/button_tooltip.tscn" type="PackedScene" id=9]
+[ext_resource path="res://art/keys/A-Key.png" type="Texture" id=10]
+[ext_resource path="res://art/keys/W-Key.png" type="Texture" id=11]
+[ext_resource path="res://art/keys/D-Key.png" type="Texture" id=12]
+[ext_resource path="res://art/keys/S-Key.png" type="Texture" id=13]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 0, 5, 32, 27 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 12 )
+region = Rect2( 0, 5, 32, 27 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 0, 5, 32, 27 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 13 )
+region = Rect2( 0, 5, 32, 27 )
+
+[sub_resource type="AnimatedTexture" id=5]
+flags = 4
+frames = 2
+fps = 2.0
+frame_0/texture = ExtResource( 7 )
+frame_1/texture = ExtResource( 3 )
+frame_1/delay_sec = 0.0
+
+[node name="LevelGui" type="Control"]
+pause_mode = 2
+anchor_left = 0.02
+anchor_top = 0.04
+anchor_right = 0.98
+anchor_bottom = 0.96
+mouse_filter = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+slider_location = 3
+level_name = "Level Name"
+level_flavor_text = "This is the level flavor text, put a little intro here explaining the level objective and mechanics."
+bonus_action_text = "Bonus action description."
+main_action_text = "Main action description."
+second_action_text = "Secondary action description."
+
+[node name="ScorePanel" parent="." instance=ExtResource( 5 )]
+margin_right = -3.05176e-05
+
+[node name="BonusGui" parent="." instance=ExtResource( 6 )]
+
+[node name="AffectiveSlider" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.97
+anchor_top = 0.5
+anchor_right = 0.97
+anchor_bottom = 0.5
+margin_left = -257.536
+margin_top = -24.0
+margin_right = 262.464
+margin_bottom = 26.0
+rect_rotation = -90.0
+rect_scale = Vector2( 0.8, 0.8 )
+location = 1
+vertical = true
+scale_ponderator = 0.8
+
+[node name="BgLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+layer = -10
+
+[node name="Background" type="ColorRect" parent="BgLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+layer = -128
+
+[node name="ColorRect" type="ColorRect" parent="PauseLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.67451, 0.67451, 0.67451, 0.352941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PauseLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 2 )
+text = "paused"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IntroLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+layer = -20
+
+[node name="Panel" type="ColorRect" parent="IntroLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+color = Color( 0.560784, 0.560784, 0.560784, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelLayout" type="VBoxContainer" parent="IntroLayer/Panel"]
+anchor_left = 0.03
+anchor_top = 0.03
+anchor_right = 0.97
+anchor_bottom = 0.97
+grow_horizontal = 2
+grow_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelName" type="Label" parent="IntroLayer/Panel/PanelLayout"]
+margin_right = 1165.0
+margin_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 583, 61 )
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+text = "Level Name"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelFlavorText" type="Label" parent="IntroLayer/Panel/PanelLayout"]
+margin_top = 129.0
+margin_right = 1165.0
+margin_bottom = 197.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 583, 61 )
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 8 )
+text = "This is the level flavor text, put a little intro here explaining the level objective and mechanics "
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DefaultButtons" type="HBoxContainer" parent="IntroLayer/Panel/PanelLayout"]
+margin_top = 205.0
+margin_right = 1165.0
+margin_bottom = 379.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="ValenceDown" parent="IntroLayer/Panel/PanelLayout/DefaultButtons" instance=ExtResource( 9 )]
+margin_bottom = 174.0
+button_text = "Keep pressed to change your mood down and start a bonus charge"
+button_texture = SubResource( 1 )
+
+[node name="PauseButton" parent="IntroLayer/Panel/PanelLayout/DefaultButtons" instance=ExtResource( 9 )]
+margin_left = 391.0
+margin_right = 774.0
+margin_bottom = 174.0
+button_text = "Pause the game to take a break"
+
+[node name="ValenceUp" parent="IntroLayer/Panel/PanelLayout/DefaultButtons" instance=ExtResource( 9 )]
+margin_left = 782.0
+margin_right = 1165.0
+margin_bottom = 174.0
+button_text = "Keep pressed to change your mood up and start a bonus charge"
+button_texture = SubResource( 2 )
+
+[node name="LevelButtons" type="HBoxContainer" parent="IntroLayer/Panel/PanelLayout"]
+margin_top = 387.0
+margin_right = 1165.0
+margin_bottom = 561.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="BonusAction" parent="IntroLayer/Panel/PanelLayout/LevelButtons" instance=ExtResource( 9 )]
+margin_bottom = 174.0
+button_text = "Bonus action description."
+button_texture = SubResource( 3 )
+
+[node name="PrimaryAction" parent="IntroLayer/Panel/PanelLayout/LevelButtons" instance=ExtResource( 9 )]
+margin_left = 391.0
+margin_right = 774.0
+margin_bottom = 174.0
+button_text = "Main action description."
+button_texture = ExtResource( 7 )
+button_stretch_ratio = 2.5
+
+[node name="SecondaryAction" parent="IntroLayer/Panel/PanelLayout/LevelButtons" instance=ExtResource( 9 )]
+margin_left = 782.0
+margin_right = 1165.0
+margin_bottom = 174.0
+button_text = "Secondary action description."
+button_texture = SubResource( 4 )
+
+[node name="StartTooltip" type="HBoxContainer" parent="IntroLayer/Panel/PanelLayout"]
+margin_top = 569.0
+margin_right = 1165.0
+margin_bottom = 639.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+alignment = 1
+
+[node name="Padding1" type="Control" parent="IntroLayer/Panel/PanelLayout/StartTooltip"]
+margin_right = 328.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="ButtonTooltip" parent="IntroLayer/Panel/PanelLayout/StartTooltip" instance=ExtResource( 9 )]
+margin_left = 336.0
+margin_right = 883.0
+margin_bottom = 70.0
+button_text = "Press to start the game!"
+button_texture = SubResource( 5 )
+button_stretch_ratio = 3.0
+
+[node name="Padding2" type="Control" parent="IntroLayer/Panel/PanelLayout/StartTooltip"]
+margin_left = 891.0
+margin_right = 1165.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5

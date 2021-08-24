@@ -1,0 +1,177 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "SelfFocusingButton",
+"class": "ButtonId",
+"language": "GDScript",
+"path": "res://scripts/gui/button_id.gd"
+}, {
+"base": "Node2D",
+"class": "Controller",
+"language": "GDScript",
+"path": "res://scripts/levels/base_level/controller.gd"
+}, {
+"base": "Node",
+"class": "HeartConnector",
+"language": "GDScript",
+"path": "res://scripts/autoload/heart_connector.gd"
+}, {
+"base": "Node",
+"class": "LevelController",
+"language": "GDScript",
+"path": "res://scripts/levels/base_level/level_controller.gd"
+}, {
+"base": "Control",
+"class": "LevelGui",
+"language": "GDScript",
+"path": "res://scripts/levels/level_gui/level_gui.gd"
+}, {
+"base": "Path2D",
+"class": "PlayerRail",
+"language": "GDScript",
+"path": "res://scripts/levels/inward_outward/player_rail.gd"
+}, {
+"base": "Node2D",
+"class": "RailSystem",
+"language": "GDScript",
+"path": "res://scripts/levels/inward_outward/rail_system.gd"
+}, {
+"base": "Button",
+"class": "SelfFocusingButton",
+"language": "GDScript",
+"path": "res://scripts/gui/self_focusing_button.gd"
+}, {
+"base": "Node",
+"class": "Settings",
+"language": "GDScript",
+"path": "res://scripts/autoload/settings.gd"
+}, {
+"base": "Node2D",
+"class": "SpawnerSystem",
+"language": "GDScript",
+"path": "res://scripts/levels/inward_outward/spawner_system.gd"
+} ]
+_global_script_class_icons={
+"ButtonId": "",
+"Controller": "",
+"HeartConnector": "",
+"LevelController": "",
+"LevelGui": "",
+"PlayerRail": "",
+"RailSystem": "",
+"SelfFocusingButton": "",
+"Settings": "",
+"SpawnerSystem": ""
+}
+
+[application]
+
+config/name="HRM Game"
+run/main_scene="res://scenes/main_menu.tscn"
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
+config/icon="res://art/icon/icon.png"
+
+[autoload]
+
+settings="*res://scripts/autoload/settings.gd"
+scene_switcher="*res://scripts/autoload/scene_switcher.gd"
+heart_connector="*res://scripts/autoload/heart_connector.gd"
+logger="*res://scripts/autoload/logger.gd"
+
+[debug]
+
+gdscript/completion/autocomplete_setters_and_getters=true
+gdscript/warnings/return_value_discarded=false
+gdscript/warnings/unsafe_cast=true
+gdscript/warnings/unsafe_call_argument=true
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/dpi/allow_hidpi=true
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[gui]
+
+theme/use_hidpi=true
+
+[input]
+
+ui_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
+ ]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
+ ]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+ ]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
+ ]
+}
+ui_pause={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+secondary_action={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+main_action={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_render/layer_1="gui_standard"
+2d_render/layer_2="gui_light-cropped"
+2d_render/layer_3="gui_background"
+2d_render/layer_4="gui_debug"
+2d_render/layer_6="world_curtains"
+2d_render/layer_7="world_upper"
+2d_render/layer_8="world_standard"
+2d_render/layer_9="world_lower"
+
+[locale]
+
+locale_filter=[ 0, [ "en_CA", "es_CL" ] ]
+
+[rendering]
+
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0
+environment/default_clear_color=Color( 0.34902, 0.345098, 0.345098, 1 )
+quality/filters/msaa=4
+environment/default_environment="res://default_env.tres"
+quality/dynamic_fonts/use_oversampling=false

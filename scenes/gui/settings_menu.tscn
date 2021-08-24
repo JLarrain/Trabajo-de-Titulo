@@ -1,0 +1,313 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://scenes/gui/color_palette.tscn" type="PackedScene" id=1]
+[ext_resource path="res://art/textures/gui/triangle_button/disabled.png" type="Texture" id=2]
+[ext_resource path="res://art/textures/gui/triangle_button/normal.png" type="Texture" id=3]
+[ext_resource path="res://art/textures/gui/triangle_button/hovered.png" type="Texture" id=4]
+[ext_resource path="res://art/textures/gui/triangle_button/pressed.png" type="Texture" id=5]
+[ext_resource path="res://assets/theme/fonts/menu_panel_subtitle.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/theme/game_theme.tres" type="Theme" id=7]
+[ext_resource path="res://scripts/gui/Settings/palette_manager.gd" type="Script" id=8]
+[ext_resource path="res://scripts/gui/Settings/palettes.gd" type="Script" id=9]
+[ext_resource path="res://scripts/gui/Settings/settings_menu.gd" type="Script" id=10]
+[ext_resource path="res://scripts/gui/Settings/mute.gd" type="Script" id=11]
+[ext_resource path="res://art/textures/gui/triangle_button/click_mask.png" type="BitMap" id=12]
+
+
+
+
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="Theme" id=6]
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/styles/grabber = SubResource( 1 )
+HScrollBar/styles/grabber_highlight = SubResource( 2 )
+HScrollBar/styles/grabber_pressed = SubResource( 3 )
+HScrollBar/styles/scroll = SubResource( 4 )
+HScrollBar/styles/scroll_focus = SubResource( 5 )
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="GDScript" id=12]
+script/source = "extends Button
+
+# * Signals
+
+# Thrown when the button is hovered, with itself as btn
+signal hovered(btn)
+
+# * Functions
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	self.connect(\"mouse_entered\", self, \"ask_focus\")
+
+
+# When this button is hovered, asks to be focused
+func ask_focus() -> void:
+	emit_signal(\"hovered\", self)
+"
+
+[node name="SettingsMenu" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1000, 600 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_right = 1280.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 800, 72 )
+custom_fonts/font = ExtResource( 6 )
+text = "Settings"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Config" type="VBoxContainer" parent="."]
+margin_top = 80.0
+margin_right = 1280.0
+margin_bottom = 264.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Color Palettes" type="HBoxContainer" parent="Config"]
+margin_right = 1280.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+script = ExtResource( 8 )
+
+[node name="Label" type="Label" parent="Config/Color Palettes"]
+margin_top = 32.0
+margin_right = 424.0
+margin_bottom = 63.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 6 )
+text = "Color palette"
+
+[node name="Palettes" type="HBoxContainer" parent="Config/Color Palettes"]
+margin_left = 432.0
+margin_right = 1280.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+alignment = 1
+script = ExtResource( 9 )
+
+[node name="PrevPalette" type="TextureButton" parent="Config/Color Palettes/Palettes"]
+margin_right = 30.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 30, 61 )
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 2 )
+texture_focused = ExtResource( 3 )
+texture_click_mask = ExtResource( 12 )
+expand = true
+stretch_mode = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Config/Color Palettes/Palettes"]
+margin_left = 38.0
+margin_right = 810.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 600, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 6 )
+follow_focus = true
+scroll_vertical_enabled = false
+
+[node name="Palettes" type="HBoxContainer" parent="Config/Color Palettes/Palettes/ScrollContainer"]
+margin_right = 3860.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 3860, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+alignment = 1
+
+[node name="StandardPallete" parent="Config/Color Palettes/Palettes/ScrollContainer/Palettes" instance=ExtResource( 1 )]
+rect_min_size = Vector2( 600, 0 )
+
+[node name="Black and White" parent="Config/Color Palettes/Palettes/ScrollContainer/Palettes" instance=ExtResource( 1 )]
+margin_left = 772.0
+margin_right = 1544.0
+rect_min_size = Vector2( 600, 0 )
+palette_name = "Black and White"
+relaxed_color = Color( 0, 0, 0, 1 )
+hyped_color = Color( 1, 1, 1, 1 )
+
+[node name="Protanopia" parent="Config/Color Palettes/Palettes/ScrollContainer/Palettes" instance=ExtResource( 1 )]
+margin_left = 1544.0
+margin_right = 2316.0
+rect_min_size = Vector2( 600, 0 )
+palette_name = "Protanopia"
+relaxed_color = Color( 0, 0.356863, 1, 1 )
+hyped_color = Color( 1, 0.67451, 0.0431373, 1 )
+
+[node name="Deuteranopia" parent="Config/Color Palettes/Palettes/ScrollContainer/Palettes" instance=ExtResource( 1 )]
+margin_left = 2316.0
+margin_right = 3088.0
+rect_min_size = Vector2( 600, 0 )
+palette_name = "Deuteranopia"
+relaxed_color = Color( 0, 0.623529, 1, 1 )
+hyped_color = Color( 1, 0.623529, 0, 1 )
+
+[node name="Tritanopia" parent="Config/Color Palettes/Palettes/ScrollContainer/Palettes" instance=ExtResource( 1 )]
+margin_left = 3088.0
+margin_right = 3860.0
+rect_min_size = Vector2( 600, 0 )
+palette_name = "Tritanopia"
+relaxed_color = Color( 0.431373, 0, 1, 1 )
+
+[node name="RotWrapper" type="Control" parent="Config/Color Palettes/Palettes"]
+margin_left = 818.0
+margin_right = 848.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 30, 96 )
+
+[node name="NextPalette" type="TextureButton" parent="Config/Color Palettes/Palettes/RotWrapper"]
+margin_left = -2.0
+margin_top = -24.0
+margin_right = 28.0
+margin_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 30, 61 )
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( 15, 61 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 2 )
+texture_focused = ExtResource( 3 )
+texture_click_mask = ExtResource( 12 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mute" type="HBoxContainer" parent="Config"]
+margin_top = 104.0
+margin_right = 1280.0
+margin_bottom = 184.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_vertical = 3
+script = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="Config/Mute"]
+margin_top = 24.0
+margin_right = 1120.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 6 )
+text = "Mute"
+
+[node name="Toggle" type="CheckButton" parent="Config/Mute"]
+margin_left = 1128.0
+margin_right = 1280.0
+margin_bottom = 80.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/hover_pressed = SubResource( 10 )
+align = 2
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 272.0
+margin_right = 1280.0
+margin_bottom = 640.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+custom_styles/separator = SubResource( 11 )
+
+[node name="Back" type="HBoxContainer" parent="."]
+margin_top = 648.0
+margin_right = 1280.0
+margin_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 800, 72 )
+
+[node name="BackContainer" type="CenterContainer" parent="Back"]
+margin_right = 636.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+
+[node name="BackButton" type="Button" parent="Back/BackContainer"]
+margin_left = 268.0
+margin_top = 21.0
+margin_right = 368.0
+margin_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 100, 30 )
+size_flags_horizontal = 3
+theme = ExtResource( 7 )
+text = "Back to"
+script = SubResource( 12 )
+
+[node name="SaveContainer" type="CenterContainer" parent="Back"]
+margin_left = 644.0
+margin_right = 1280.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+
+[node name="SaveButton" type="Button" parent="Back/SaveContainer"]
+margin_left = 247.0
+margin_top = 21.0
+margin_right = 388.0
+margin_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 100, 30 )
+size_flags_horizontal = 3
+theme = ExtResource( 7 )
+text = "  Save Changes  "
+script = SubResource( 12 )
+[connection signal="palette_changed" from="Config/Color Palettes/Palettes" to="Config/Color Palettes" method="_set_selected"]
+[connection signal="pressed" from="Config/Color Palettes/Palettes/PrevPalette" to="Config/Color Palettes/Palettes" method="previous_palette"]
+[connection signal="pressed" from="Config/Color Palettes/Palettes/RotWrapper/NextPalette" to="Config/Color Palettes/Palettes" method="next_palette"]
+[connection signal="sound_changed" from="Config/Mute" to="." method="propagate_sound_change"]
+[connection signal="hovered" from="Back/BackContainer/BackButton" to="." method="_request_focus"]
+[connection signal="pressed" from="Back/BackContainer/BackButton" to="." method="_exit_menu"]
+[connection signal="hovered" from="Back/SaveContainer/SaveButton" to="." method="_request_focus"]
+[connection signal="pressed" from="Back/SaveContainer/SaveButton" to="." method="_save_changes"]

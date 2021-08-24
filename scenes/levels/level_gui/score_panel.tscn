@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/theme/game_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/levels/level_gui/score_panel.gd" type="Script" id=2]
+
+[node name="ScorePanel" type="Control"]
+pause_mode = 1
+anchor_right = 0.11
+anchor_bottom = 0.125
+margin_right = -0.800003
+margin_bottom = 7.62939e-06
+rect_min_size = Vector2( 141, 42 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchor_right = 0.4
+anchor_bottom = 0.5
+margin_right = 0.199989
+text = "Score: "
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PointsLabel" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+text = "0"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MultLabel" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 0.6
+anchor_bottom = 1.0
+margin_right = 3.0
+text = "Multiplier: "
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="BonusLabel" type="Label" parent="."]
+anchor_left = 0.6
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.200012
+margin_right = -1.52588e-05
+grow_horizontal = 0
+text = "1"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}

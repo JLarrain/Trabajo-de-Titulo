@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/levels/base_level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/levels/color_runner/level_controller.gd" type="Script" id=2]
+[ext_resource path="res://scripts/levels/color_runner/player_controller.gd" type="Script" id=3]
+[ext_resource path="res://scripts/levels/color_runner/environment_controller.gd" type="Script" id=4]
+[ext_resource path="res://scripts/levels/color_runner/platform_manager.gd" type="Script" id=5]
+[ext_resource path="res://scenes/levels/color_runner/character.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/levels/color_runner/platform.tscn" type="PackedScene" id=8]
+
+[node name="LevelController" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="World" parent="." index="0"]
+position = Vector2( 0, 130 )
+
+[node name="EnvironmentController" parent="World" index="0"]
+script = ExtResource( 4 )
+
+[node name="PlayingArea" type="Control" parent="World/EnvironmentController" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1280.0
+margin_bottom = 460.0
+rect_min_size = Vector2( 720, 460 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="ColorRect" parent="World/EnvironmentController/PlayingArea" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.705882, 0.705882, 0.705882, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PlatformManager" type="Node2D" parent="World/EnvironmentController" index="1"]
+position = Vector2( 1800, 458 )
+script = ExtResource( 5 )
+
+[node name="Blue" type="Node2D" parent="World/EnvironmentController/PlatformManager" index="0"]
+modulate = Color( 0, 0, 1, 0.705882 )
+
+[node name="Platform" parent="World/EnvironmentController/PlatformManager/Blue" index="0" instance=ExtResource( 8 )]
+position = Vector2( -700, 0 )
+collision_layer = 34
+linear_velocity = Vector2( -300, 0 )
+
+[node name="Red" type="Node2D" parent="World/EnvironmentController/PlatformManager" index="1"]
+modulate = Color( 1, 0, 0, 0.705882 )
+
+[node name="Platform" parent="World/EnvironmentController/PlatformManager/Red" index="0" instance=ExtResource( 8 )]
+position = Vector2( -1300, 0 )
+collision_layer = 33
+linear_velocity = Vector2( -300, 0 )
+
+[node name="BlueTimer" type="Timer" parent="World/EnvironmentController/PlatformManager" index="2"]
+wait_time = 2.2
+autostart = true
+
+[node name="RedTimer" type="Timer" parent="World/EnvironmentController/PlatformManager" index="3"]
+wait_time = 0.8
+autostart = true
+
+[node name="BonusTimer" type="Timer" parent="World/EnvironmentController/PlatformManager" index="4"]
+wait_time = 0.2
+one_shot = true
+
+[node name="PlayerController" parent="World" index="1"]
+script = ExtResource( 3 )
+
+[node name="PlayerSpawn" type="Position2D" parent="World/PlayerController" index="0"]
+position = Vector2( 248, 70 )
+
+[node name="Character" parent="World/PlayerController" index="1" instance=ExtResource( 7 )]
+position = Vector2( 248, 70 )
+gravity_scale = 5.0
+contacts_reported = 1
+contact_monitor = true
+can_sleep = false
+linear_damp = 0.0
+angular_damp = 0.0
+applied_force = Vector2( 0, 0 )
+
+[node name="BorderCover" type="Control" parent="World" index="3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -130.0
+margin_right = 1280.0
+margin_bottom = 590.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Upper" type="ColorRect" parent="World/BorderCover" index="0"]
+anchor_right = 1.0
+anchor_bottom = 0.18
+color = Color( 0, 0, 0, 1 )
+
+[node name="Lower" type="ColorRect" parent="World/BorderCover" index="1"]
+anchor_top = 0.82
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="LevelGui" parent="." index="1"]
+slider_location = 3
+bonus_location = 0
+score_location = 1
+level_name = "Color Runner"
+level_flavor_text = "Jump between platforms changing your color to change the world you can touch, avoid obstacles to keep going fast and speed up your breathing to increase your acceleration, and with it your score!"
+bonus_action_text = "Shifts all obstacles to the opposite color of your character for a few seconds"
+main_action_text = "Jump and then hold to reduce the gravity on you"
+second_action_text = "Change the active color of your character, changing which platforms you can touch"
+[connection signal="timeout" from="World/EnvironmentController/PlatformManager/BlueTimer" to="World/EnvironmentController/PlatformManager" method="create_platform" binds= [ false ]]
+[connection signal="timeout" from="World/EnvironmentController/PlatformManager/RedTimer" to="World/EnvironmentController/PlatformManager" method="create_platform" binds= [ true ]]
+[connection signal="timeout" from="World/EnvironmentController/PlatformManager/BonusTimer" to="World/EnvironmentController/PlatformManager" method="bonus_tick"]
+[connection signal="cube_collision" from="World/PlayerController" to="." method="update_speed" binds= [ false ]]
+[connection signal="jump_set_complete" from="World/PlayerController" to="." method="update_speed" binds= [ true ]]
+[connection signal="jump_set_complete" from="World/PlayerController" to="." method="update_multiplier" binds= [ true ]]
+[connection signal="off_screen" from="World/PlayerController" to="." method="update_multiplier" binds= [ false ]]
+[connection signal="body_entered" from="World/PlayerController/Character" to="World/PlayerController" method="_inform_contact" binds= [ true ]]
+[connection signal="body_exited" from="World/PlayerController/Character" to="World/PlayerController" method="_inform_contact" binds= [ false ]]
+[connection signal="cube_collision" from="World/PlayerController/Character" to="World/PlayerController" method="handle_cube_collision"]
+[connection signal="off_screen" from="World/PlayerController/Character" to="World/PlayerController" method="handle_off_screen"]

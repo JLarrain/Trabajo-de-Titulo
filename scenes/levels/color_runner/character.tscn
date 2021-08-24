@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://art/textures/levels/color_runner/ball.png" type="Texture" id=1]
+[ext_resource path="res://scripts/levels/color_runner/character.gd" type="Script" id=2]
+
+[sub_resource type="PhysicsMaterial" id=2]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20, 20 )
+
+[node name="Character" type="RigidBody2D"]
+modulate = Color( 1, 0, 0, 1 )
+collision_layer = 0
+mass = 0.01
+physics_material_override = SubResource( 2 )
+applied_force = Vector2( 0, 9.8 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="off_screen"]

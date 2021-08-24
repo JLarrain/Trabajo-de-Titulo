@@ -1,0 +1,10 @@
+# Godot import files
+
+*.md5
+*.import
+.import/
+export.cfg
+export_presets.cfg
+
+# VSCode settings
+.vscode/*

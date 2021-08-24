@@ -1,0 +1,572 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://scripts/gui/MainMenu/gui.gd" type="Script" id=1]
+[ext_resource path="res://assets/new/light_Background.png" type="Texture" id=2]
+[ext_resource path="res://scripts/gui/self_focusing_button.gd" type="Script" id=3]
+[ext_resource path="res://scripts/main.gd" type="Script" id=4]
+[ext_resource path="res://scripts/gui/MainMenu/menu_options.gd" type="Script" id=5]
+[ext_resource path="res://assets/theme/game_theme.tres" type="Theme" id=6]
+[ext_resource path="res://art/textures/gui/transparent_panel/transparent.png" type="Texture" id=7]
+[ext_resource path="res://assets/theme/fonts/main_title.tres" type="DynamicFont" id=8]
+[ext_resource path="res://scenes/gui/scan_gui.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scripts/gui/MainMenu/initial_survey.gd" type="Script" id=10]
+[ext_resource path="res://assets/theme/fonts/menu_panel_subtitle.tres" type="DynamicFont" id=11]
+[ext_resource path="res://assets/theme/fonts/menu_panel_title.tres" type="DynamicFont" id=12]
+[ext_resource path="res://art/keys/D-Key Off.png" type="Texture" id=13]
+[ext_resource path="res://art/keys/D-Key On.png" type="Texture" id=14]
+[ext_resource path="res://art/keys/A-Key Off.png" type="Texture" id=15]
+[ext_resource path="res://art/keys/A-Key On.png" type="Texture" id=16]
+[ext_resource path="res://scenes/gui/affective_slider.tscn" type="PackedScene" id=17]
+
+[sub_resource type="AnimatedTexture" id=1]
+flags = 4
+frames = 2
+fps = 2.0
+frame_0/texture = ExtResource( 15 )
+frame_1/texture = ExtResource( 16 )
+frame_1/delay_sec = 0.0
+
+[sub_resource type="AnimatedTexture" id=2]
+flags = 4
+frames = 2
+fps = 2.0
+frame_0/texture = ExtResource( 13 )
+frame_1/texture = ExtResource( 14 )
+frame_1/delay_sec = 0.0
+
+[node name="MainMenu" type="Node"]
+script = ExtResource( 4 )
+
+[node name="GUI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 6 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="GUI"]
+position = Vector2( 639.677, 361.611 )
+scale = Vector2( 2.675, 2.7037 )
+texture = ExtResource( 2 )
+
+[node name="Menu" type="VBoxContainer" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 120.0
+margin_top = 80.0
+margin_right = -120.0
+margin_bottom = -80.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="GUI/Menu"]
+margin_right = 1040.0
+margin_bottom = 121.0
+grow_horizontal = 2
+rect_pivot_offset = Vector2( 47.5, 0 )
+size_flags_horizontal = 3
+theme = ExtResource( 6 )
+custom_fonts/font = ExtResource( 8 )
+text = "Bubble"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Separator" type="NinePatchRect" parent="GUI/Menu"]
+pause_mode = 2
+show_behind_parent = true
+margin_top = 129.0
+margin_right = 1040.0
+margin_bottom = 411.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 128.0
+texture = ExtResource( 7 )
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="Content" type="CenterContainer" parent="GUI/Menu/Separator"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 23.0
+margin_right = -16.0
+margin_bottom = -17.0
+rect_min_size = Vector2( 1000, 200 )
+rect_scale = Vector2( 1, 0.993854 )
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuOptions" type="VBoxContainer" parent="GUI/Menu"]
+margin_top = 419.0
+margin_right = 1040.0
+margin_bottom = 560.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 64.0
+alignment = 1
+script = ExtResource( 5 )
+
+[node name="Scan" type="Button" parent="GUI/Menu/MenuOptions" groups=[
+"buttons",
+]]
+margin_left = 438.0
+margin_right = 602.0
+margin_bottom = 141.0
+rect_min_size = Vector2( 140, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 3
+size_flags_stretch_ratio = 95.68
+text = "Select your MiBand"
+script = ExtResource( 3 )
+
+[node name="Start" type="Button" parent="GUI/Menu/MenuOptions" groups=[
+"buttons",
+]]
+visible = false
+margin_left = 450.0
+margin_top = 74.0
+margin_right = 590.0
+margin_bottom = 141.0
+rect_min_size = Vector2( 140, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 3
+size_flags_stretch_ratio = 95.68
+text = "Start Tutorial"
+script = ExtResource( 3 )
+
+[node name="Settings" type="Button" parent="GUI/Menu/MenuOptions" groups=[
+"buttons",
+]]
+visible = false
+margin_left = 460.0
+margin_top = 49.0
+margin_right = 580.0
+margin_bottom = 91.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 3
+size_flags_stretch_ratio = 95.68
+text = "Settings"
+script = ExtResource( 3 )
+
+[node name="Quit" type="Button" parent="GUI/Menu/MenuOptions" groups=[
+"buttons",
+]]
+visible = false
+margin_left = 460.0
+margin_top = 74.0
+margin_right = 580.0
+margin_bottom = 141.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 3
+size_flags_stretch_ratio = 95.68
+text = "Quit Game"
+script = ExtResource( 3 )
+
+[node name="ScanGui" parent="GUI/Menu" instance=ExtResource( 9 )]
+visible = false
+margin_left = 0.0
+margin_top = 347.0
+margin_right = 1040.0
+margin_bottom = 559.0
+
+[node name="InitialSurvey" type="HBoxContainer" parent="GUI"]
+visible = false
+anchor_left = -1.0
+anchor_right = 2.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PadLeft" type="VBoxContainer" parent="GUI/InitialSurvey"]
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Survey1" type="VBoxContainer" parent="GUI/InitialSurvey"]
+margin_left = 1280.0
+margin_right = 2560.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PadTop" type="Control" parent="GUI/InitialSurvey/Survey1"]
+margin_right = 1280.0
+margin_bottom = 137.0
+size_flags_vertical = 3
+
+[node name="Question1" type="Label" parent="GUI/InitialSurvey/Survey1"]
+margin_top = 145.0
+margin_right = 1280.0
+margin_bottom = 283.0
+grow_horizontal = 2
+rect_pivot_offset = Vector2( 47.5, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 6 )
+custom_fonts/font = ExtResource( 11 )
+text = "Now, we're gonna ask you a couple of questions:
+
+First, how are you feeling? Please click the answer that feels
+closer to your mood right now"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Question2" type="Label" parent="GUI/InitialSurvey/Survey1"]
+visible = false
+margin_top = 252.0
+margin_right = 1280.0
+margin_bottom = 385.0
+grow_horizontal = 2
+rect_pivot_offset = Vector2( 47.5, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 6 )
+custom_fonts/font = ExtResource( 11 )
+text = "Now, we're gonna ask you a couple of questions:
+
+Second, how do you want to feel? Please click the answer
+that feels closer the mood you want"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PadMid" type="Control" parent="GUI/InitialSurvey/Survey1"]
+margin_top = 291.0
+margin_right = 1280.0
+margin_bottom = 360.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="MoodButtons1" type="HBoxContainer" parent="GUI/InitialSurvey/Survey1"]
+margin_top = 368.0
+margin_right = 1280.0
+margin_bottom = 574.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PadLeft" type="Control" parent="GUI/InitialSurvey/Survey1/MoodButtons1"]
+margin_right = 305.0
+margin_bottom = 206.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LowValence" type="VBoxContainer" parent="GUI/InitialSurvey/Survey1/MoodButtons1"]
+margin_left = 325.0
+margin_right = 630.0
+margin_bottom = 206.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 40
+
+[node name="Angry" type="Button" parent="GUI/InitialSurvey/Survey1/MoodButtons1/LowValence"]
+margin_right = 305.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 12 )
+text = "Angry"
+script = ExtResource( 3 )
+
+[node name="Bored" type="Button" parent="GUI/InitialSurvey/Survey1/MoodButtons1/LowValence"]
+margin_top = 123.0
+margin_right = 305.0
+margin_bottom = 206.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 12 )
+text = "Bored"
+script = ExtResource( 3 )
+
+[node name="HighValence" type="VBoxContainer" parent="GUI/InitialSurvey/Survey1/MoodButtons1"]
+margin_left = 650.0
+margin_right = 955.0
+margin_bottom = 206.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 40
+
+[node name="Excited" type="Button" parent="GUI/InitialSurvey/Survey1/MoodButtons1/HighValence"]
+margin_right = 305.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 12 )
+text = "Excited"
+script = ExtResource( 3 )
+
+[node name="Relaxed" type="Button" parent="GUI/InitialSurvey/Survey1/MoodButtons1/HighValence"]
+margin_top = 123.0
+margin_right = 305.0
+margin_bottom = 206.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 12 )
+text = "Relaxed"
+script = ExtResource( 3 )
+
+[node name="PadRight" type="Control" parent="GUI/InitialSurvey/Survey1/MoodButtons1"]
+margin_left = 975.0
+margin_right = 1280.0
+margin_bottom = 206.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MoodButtons2" type="HBoxContainer" parent="GUI/InitialSurvey/Survey1"]
+visible = false
+margin_top = 462.0
+margin_right = 1280.0
+margin_bottom = 611.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PadLeft" type="Control" parent="GUI/InitialSurvey/Survey1/MoodButtons2"]
+margin_right = 413.0
+margin_bottom = 149.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HighValence" type="VBoxContainer" parent="GUI/InitialSurvey/Survey1/MoodButtons2"]
+margin_left = 433.0
+margin_right = 846.0
+margin_bottom = 149.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 40
+
+[node name="Excited" type="Button" parent="GUI/InitialSurvey/Survey1/MoodButtons2/HighValence"]
+margin_right = 413.0
+margin_bottom = 54.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 12 )
+text = "Excited"
+script = ExtResource( 3 )
+
+[node name="Relaxed" type="Button" parent="GUI/InitialSurvey/Survey1/MoodButtons2/HighValence"]
+margin_top = 94.0
+margin_right = 413.0
+margin_bottom = 149.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 12 )
+text = "Relaxed"
+script = ExtResource( 3 )
+
+[node name="PadRight" type="Control" parent="GUI/InitialSurvey/Survey1/MoodButtons2"]
+margin_left = 866.0
+margin_right = 1280.0
+margin_bottom = 149.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PadBottom" type="Control" parent="GUI/InitialSurvey/Survey1"]
+margin_top = 582.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_vertical = 3
+
+[node name="Survey2" type="VBoxContainer" parent="GUI/InitialSurvey"]
+margin_left = 2560.0
+margin_right = 3840.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PadTop" type="Control" parent="GUI/InitialSurvey/Survey2"]
+margin_right = 1280.0
+margin_bottom = 62.0
+size_flags_vertical = 3
+
+[node name="Question1" type="Label" parent="GUI/InitialSurvey/Survey2"]
+margin_top = 70.0
+margin_right = 1280.0
+margin_bottom = 407.0
+grow_horizontal = 2
+rect_pivot_offset = Vector2( 47.5, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 6 )
+custom_fonts/font = ExtResource( 11 )
+text = "Now we would like to show you the affective slider:
+
+In this slider you can tell the game how you're feeling, so we can adjust your experience and you can get some nice bonuses
+
+The slider will accompany you through the game, and can be seen on the top, bottom, left or right side of the screen depending on the level
+
+Please, adjust the slider to how you're feeling right now, being the left extreme very bad and the right extreme very good, and then press the start button to begin!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PadMid" type="Control" parent="GUI/InitialSurvey/Survey2"]
+margin_top = 415.0
+margin_right = 1280.0
+margin_bottom = 446.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Slider" type="HBoxContainer" parent="GUI/InitialSurvey/Survey2"]
+margin_top = 454.0
+margin_right = 1280.0
+margin_bottom = 548.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+custom_constants/separation = 20
+
+[node name="ValenceDownKey" type="TextureRect" parent="GUI/InitialSurvey/Survey2/Slider"]
+margin_right = 310.0
+margin_bottom = 94.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="SliderContainer" type="Control" parent="GUI/InitialSurvey/Survey2/Slider"]
+margin_left = 330.0
+margin_top = 47.0
+margin_right = 950.0
+margin_bottom = 47.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg" type="ColorRect" parent="GUI/InitialSurvey/Survey2/Slider/SliderContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -30.0
+margin_bottom = 30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AffectiveSlider" parent="GUI/InitialSurvey/Survey2/Slider/SliderContainer" instance=ExtResource( 17 )]
+rect_scale = Vector2( 1.2, 1.2 )
+scale_ponderator = 1.2
+
+[node name="ValenceUpKey" type="TextureRect" parent="GUI/InitialSurvey/Survey2/Slider"]
+margin_left = 970.0
+margin_right = 1280.0
+margin_bottom = 94.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="StartButton" type="HBoxContainer" parent="GUI/InitialSurvey/Survey2"]
+margin_top = 556.0
+margin_right = 1280.0
+margin_bottom = 649.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PadLeft" type="Control" parent="GUI/InitialSurvey/Survey2/StartButton"]
+margin_right = 413.0
+margin_bottom = 93.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StartGame" type="Button" parent="GUI/InitialSurvey/Survey2/StartButton"]
+margin_left = 433.0
+margin_right = 846.0
+margin_bottom = 93.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 12 )
+text = "Start the Game"
+script = ExtResource( 3 )
+
+[node name="PadRight" type="Control" parent="GUI/InitialSurvey/Survey2/StartButton"]
+margin_left = 866.0
+margin_right = 1280.0
+margin_bottom = 93.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PadBottom" type="Control" parent="GUI/InitialSurvey/Survey2"]
+margin_top = 657.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_vertical = 3
+
+[node name="PadRight" type="VBoxContainer" parent="GUI/InitialSurvey"]
+margin_left = 3840.0
+margin_right = 3840.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="ChangePage" type="Tween" parent="GUI/InitialSurvey"]
+
+[connection signal="exit_requested" from="GUI" to="." method="exit_game"]
+[connection signal="request_hr" from="GUI" to="." method="config_hr"]
+[connection signal="start_requested" from="GUI" to="." method="start_game"]
+[connection signal="quit_pressed" from="GUI/Menu/MenuOptions" to="GUI" method="_quit_game"]
+[connection signal="scan_pressed" from="GUI/Menu/MenuOptions" to="GUI" method="_show_scan"]
+[connection signal="settings_pressed" from="GUI/Menu/MenuOptions" to="GUI" method="_show_settings"]
+[connection signal="start_pressed" from="GUI/Menu/MenuOptions" to="GUI" method="_start_survey"]
+[connection signal="pressed" from="GUI/Menu/MenuOptions/Scan" to="GUI/Menu/MenuOptions" method="_on_scan_pressed"]
+[connection signal="pressed" from="GUI/Menu/MenuOptions/Start" to="GUI/InitialSurvey" method="_start_game_pressed"]
+[connection signal="pressed" from="GUI/Menu/MenuOptions/Settings" to="GUI/Menu/MenuOptions" method="_on_settings_pressed"]
+[connection signal="pressed" from="GUI/Menu/MenuOptions/Quit" to="GUI/Menu/MenuOptions" method="_on_quit_pressed"]
+[connection signal="device_ready" from="GUI/Menu/ScanGui" to="GUI" method="_prepare_start"]
+[connection signal="data_set" from="GUI/InitialSurvey" to="." method="_set_data"]
+[connection signal="start_pressed" from="GUI/InitialSurvey" to="GUI" method="_start_game"]
+[connection signal="pressed" from="GUI/InitialSurvey/Survey1/MoodButtons1/LowValence/Angry" to="GUI/InitialSurvey" method="_first_answer" flags=6 binds= [ 5.0, 8.0 ]]
+[connection signal="pressed" from="GUI/InitialSurvey/Survey1/MoodButtons1/LowValence/Bored" to="GUI/InitialSurvey" method="_first_answer" flags=6 binds= [ 5.0, 2.0 ]]
+[connection signal="pressed" from="GUI/InitialSurvey/Survey1/MoodButtons1/HighValence/Excited" to="GUI/InitialSurvey" method="_first_answer" flags=6 binds= [ 15.0, 8.0 ]]
+[connection signal="pressed" from="GUI/InitialSurvey/Survey1/MoodButtons1/HighValence/Relaxed" to="GUI/InitialSurvey" method="_first_answer" binds= [ 15.0, 2.0 ]]
+[connection signal="pressed" from="GUI/InitialSurvey/Survey1/MoodButtons2/HighValence/Excited" to="GUI/InitialSurvey" method="_second_answer" flags=6 binds= [ 15.0, 8.0 ]]
+[connection signal="pressed" from="GUI/InitialSurvey/Survey1/MoodButtons2/HighValence/Relaxed" to="GUI/InitialSurvey" method="_second_answer" binds= [ 15.0, 2.0 ]]
+[connection signal="valence_decreased" from="GUI/InitialSurvey/Survey2/Slider/SliderContainer/AffectiveSlider" to="GUI/InitialSurvey" method="_slider_change" binds= [ -1.0 ]]
+[connection signal="valence_increased" from="GUI/InitialSurvey/Survey2/Slider/SliderContainer/AffectiveSlider" to="GUI/InitialSurvey" method="_slider_change" binds= [ 1.0 ]]
+[connection signal="pressed" from="GUI/InitialSurvey/Survey2/StartButton/StartGame" to="GUI/InitialSurvey" method="_start_game_pressed"]

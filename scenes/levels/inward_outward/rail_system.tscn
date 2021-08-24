@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/levels/inward_outward/remote_rotator.gd" type="Script" id=1]
+[ext_resource path="res://scripts/levels/inward_outward/rails.gd" type="Script" id=2]
+[ext_resource path="res://scripts/levels/inward_outward/rail_system.gd" type="Script" id=3]
+
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 640, 16, -0.00733209, -343.959, 0.00733209, 343.959, 296, 360, 0, 0, 0, 0, 640, 704, -0.0156897, 343.943, 0.0156897, -343.943, 984, 360, 0, 0, 0, 0, 640, 16 )
+}
+
+[node name="RailSystem" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Circle" type="Path2D" parent="."]
+curve = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Follower" type="PathFollow2D" parent="Circle"]
+position = Vector2( 640, 16 )
+rotation = 3.11836
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RemoteRotator" type="RemoteTransform2D" parent="Circle/Follower"]
+remote_path = NodePath("../../../Rails")
+update_position = false
+update_scale = false
+script = ExtResource( 1 )
+speed = -0.2
+
+[node name="Rails" type="Node2D" parent="."]
+position = Vector2( 640, 360 )
+rotation = 3.11836
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}

@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/levels/level_gui/bonus_gui.gd" type="Script" id=1]
+[ext_resource path="res://assets/theme/game_theme.tres" type="Theme" id=2]
+[ext_resource path="res://scripts/levels/level_gui/bonus.gd" type="Script" id=3]
+[ext_resource path="res://art/textures/levels/inward_outward/bonus_container.png" type="Texture" id=4]
+[ext_resource path="res://art/textures/levels/inward_outward/player_ball.png" type="Texture" id=5]
+
+[node name="BonusGui" type="VBoxContainer"]
+pause_mode = 1
+anchor_left = 0.867
+anchor_right = 1.0
+anchor_bottom = 0.11
+rect_min_size = Vector2( 170, 80 )
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 170.0
+margin_bottom = 21.0
+grow_horizontal = 2
+theme = ExtResource( 2 )
+text = "Bonus charges"
+align = 1
+valign = 1
+
+[node name="Bonus" type="HBoxContainer" parent="."]
+margin_top = 29.0
+margin_right = 170.0
+margin_bottom = 79.0
+grow_horizontal = 2
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Bonus" type="TextureProgress" parent="Bonus"]
+margin_right = 50.0
+margin_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 25, 25 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
+fill_mode = 8
+tint_over = Color( 0, 0, 1, 1 )
+tint_progress = Color( 0, 0, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bonus2" type="TextureProgress" parent="Bonus"]
+margin_left = 60.0
+margin_right = 110.0
+margin_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 25, 25 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
+fill_mode = 8
+tint_over = Color( 0, 0, 1, 1 )
+tint_progress = Color( 0, 0, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bonus3" type="TextureProgress" parent="Bonus"]
+margin_left = 120.0
+margin_right = 170.0
+margin_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 25, 25 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
+fill_mode = 8
+tint_over = Color( 0, 0, 1, 1 )
+tint_progress = Color( 0, 0, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadTween" type="Tween" parent="."]
+
+[node name="UnloadTween" type="Tween" parent="."]
+[connection signal="tween_all_completed" from="LoadTween" to="." method="_end_load_tween"]

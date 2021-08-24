@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/levels/base_level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/levels/inward_outward/level_controller.gd" type="Script" id=2]
+[ext_resource path="res://scripts/levels/inward_outward/player_controller.gd" type="Script" id=3]
+[ext_resource path="res://scripts/levels/inward_outward/enemy_controller.gd" type="Script" id=4]
+[ext_resource path="res://scenes/levels/inward_outward/rail_system.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/levels/inward_outward/spawner_system.tscn" type="PackedScene" id=6]
+
+[node name="LevelController" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+hr_variance_target = 0.8
+
+[node name="PlayerController" parent="World" index="1"]
+script = ExtResource( 3 )
+
+[node name="RailSystem" parent="World/PlayerController" index="0" instance=ExtResource( 5 )]
+
+[node name="EnemyController" parent="World" index="2"]
+script = ExtResource( 4 )
+
+[node name="SpawnerSystem" parent="World/EnemyController" index="0" instance=ExtResource( 6 )]
+
+[node name="LevelGui" parent="." index="1"]
+margin_left = 0.400002
+margin_top = 0.200001
+margin_right = 0.400024
+margin_bottom = 0.200012
+level_name = "Inward/Outward"
+level_flavor_text = "Dodge the enemies to keep your orbs safe, add or remove rails to modify your multiplier and slow your breathing to speed up your score!"
+bonus_action_text = "Add another rail to the game, raising your multiplier with it. You can only do this if you have bonus charges"
+main_action_text = "Change the direction of movement for your orbs to dodge the enemies"
+second_action_text = "Remove a rail lowering your multiplier, but making it easier to keep track of your other orbs"
